@@ -12,16 +12,23 @@ def call(String buildStatus = 'STARTED') {
   def message = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
 
   // Override default values based on build status
-  if (buildStatus == 'STARTED') {
-    color = '#FFFF00'
-  } else if (buildStatus == 'SUCCESSFUL') {
-    color = '#00FF00'
-  } else if (buildStatus == 'UNSTABLE') {
-    color = '#FFFF00'
-  } else {
-    color = '#FF0000'
-  }
-
+  switch (buildStatus) {
+    case 'STARTED':
+        color = '#FFFF00'
+        break
+    case 'SUCCESSFUL':
+    case 'SUCCESS':
+        color = '#00FF00'
+        break
+    case 'UNSTABLE':
+    case 'FAILURE':
+        color = '#FFFF00'
+        break
+    default:
+        color = '#FF0000'
+        break
+  }  
+  
   // Send notifications
   slackSend (color: color, message: message)
 }
