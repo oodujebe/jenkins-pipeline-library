@@ -9,7 +9,7 @@ def call(String buildStatus = 'STARTED') {
 
   // Default values
   def color = '#FF0000'
-  def message = "${buildStatus}: Job: '${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, Last Committer: ${env.GIT_AUTHOR_NAME}'"
+  def message = "${buildStatus}: Job: '${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, Last Committer: ${env.GIT_COMMITTER_NAME}'"
   // def message = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
 
   // Override default values based on build status
